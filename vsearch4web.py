@@ -38,7 +38,10 @@ def do_search() -> 'html':
     letters = request.form['letters']
     title = 'Here are the results:'
     results = str(search4letters(phrase, letters))
-    log_request(request, results)
+    try:
+        log_request(request, results)
+    except Exception as err:
+        print('Logging failed with this error:', str(err))
     return render_template('results.html',
                            the_title = title,
                            the_phrase = phrase,
